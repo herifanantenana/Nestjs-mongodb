@@ -28,11 +28,11 @@ export class UsersService {
   }
 
   getUsers() {
-    return this.userModel.find().exec();
+    return this.userModel.find().populate('settings').exec();
   }
 
   getUserById(id: string) {
-    return this.userModel.findById(id).exec();
+    return this.userModel.findById(id).populate('settings').exec();
   }
 
   updateUser(id: string, user: any) {
