@@ -15,4 +15,16 @@ export class UsersService {
     const newUser = new this.userModel(user);
     return newUser.save();
   }
+
+  getUsers() {
+    return this.userModel.find().exec();
+  }
+
+  getUserById(id: string) {
+    return this.userModel.findById(id).exec();
+  }
+
+  updateUser(id: string, user: any) {
+    return this.userModel.findByIdAndUpdate(id, user, { new: true }).exec();
+  }
 }
