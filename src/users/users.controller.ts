@@ -2,6 +2,7 @@ import {
   BadRequestException,
   Body,
   Controller,
+  Delete,
   Get,
   NotFoundException,
   Param,
@@ -42,5 +43,15 @@ export class UsersController {
     const newUser = await this.usersService.updateUser(userId, user);
     if (!newUser) throw new NotFoundException('User not found');
     return newUser;
+  }
+
+  @Delete(':id')
+  async deleteUser(@Param('id') userId: string) {
+    const isValid = mongoose.Types.ObjectId.isValid(userId);
+    if (!isValid) throw new BadRequestException('Invalid user ID');
+    const user = await this.usersService.deleteUser(userId);
+    console.log(user);
+    if (!user) throw new NotFoundException('User not found');
+    return user;
   }
 }
