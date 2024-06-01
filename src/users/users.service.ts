@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { User } from 'src/schemas/User.schema';
+import { User } from 'src/schemas/user.schema';
 import { CreateUserDto } from './dto/users.dto';
 import { UserSettings } from 'src/schemas/userSettings.schema';
 @Injectable()
@@ -28,7 +28,7 @@ export class UsersService {
   }
 
   getUsers() {
-    return this.userModel.find().populate('settings').exec();
+    return this.userModel.find().populate(['settings', 'posts']).exec();
   }
 
   getUserById(id: string) {
